@@ -9,7 +9,6 @@ void data_to_device(DevDataBlock *dev_dat, HostDataBlock *host_dat,int Ntets,int
 	//need to pitch 1D memory correctly to send to device
 	size_t height16 = 16;
 	size_t height4 = 4;
-	size_t height3 = 3;
 	size_t heightMR = MaxNodeRank*degreeP;
   size_t degP = degreeP;
 	size_t widthNODE = Nnodes;
@@ -120,7 +119,7 @@ void data_to_device(DevDataBlock *dev_dat, HostDataBlock *host_dat,int Ntets,int
 									, widthNODE
 									, degP
 									, dev_dat->dev_Ppitch) );
-	texRef_r0.normalized = false;
+	texRef_P.normalized = false;
 	//texRef_r0.filterMode = cudaFilterModeLinear;
 
 

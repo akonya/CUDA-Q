@@ -12,10 +12,10 @@ void printVTKframe(   DevDataBlock *dev_dat
 					,int step){
 
 	//need to pitch 1D memory correctly to send to device
-	size_t height3 = 3;
-	size_t widthNODE = Nnodes;
+//	size_t height3 = 3;
+//	size_t widthNODE = Nnodes;
 
-
+/*
 	HANDLE_ERROR( cudaMemcpy2D(  host_dat->host_r
 								, widthNODE*sizeof(float)
 								, dev_dat->dev_r
@@ -111,7 +111,6 @@ void printVTKframe(   DevDataBlock *dev_dat
 	/*printf("\nCheck for blowup: %f %f %f\n\n",host_dat->host_r[200+0*Nnodes]
 								,host_dat->host_r[200+1*Nnodes]
 								,host_dat->host_r[200+2*Nnodes]);*/
-
 
 
 }//printVTKframe

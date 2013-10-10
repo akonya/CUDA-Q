@@ -38,7 +38,7 @@ void packdata(NodeArray &i_Node,TetArray &i_Tet, HostDataBlock *dat,int Ntets,in
     for(int rk=0;rk<MaxNodeRank;rk++){
       dat->host_fP[nod*MaxNodeRank+rk] = 0.0;
     }//rk
-    for(int deg=0;deg<degreeP;def++){
+    for(int deg=0;deg<degreeP;deg++){
       dat->host_fP[nod*degreeP+deg] = 0.0;
     }//rk
 	}//nod

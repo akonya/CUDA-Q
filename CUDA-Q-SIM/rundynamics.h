@@ -14,7 +14,7 @@ void run_dynamics(DevDataBlock *data
 					, HostDataBlock *host_data
 					, int Ntets
 					, int Nnodes){
-
+/*
 	//==============================================================
 	//file to write energies to
 	//===============================================================
@@ -178,7 +178,7 @@ void run_dynamics(DevDataBlock *data
 
 	//===================================================================
 
-
+*/
 
 
 };

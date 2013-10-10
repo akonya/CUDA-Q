@@ -158,17 +158,10 @@ void TetArray::printState(){
 
 //switch all elemnts of both Tet arrays for i and j
 void TetArray::switch_tets(int i, int j){
-	float buffpos,buffA,buffTh,buffPhi;
+	float buffpos,buffA;
 	int buffnab;
 	if(i>-1&&i<size){
 		if(j>-1&&j<size){
-
-			buffTh = ThPhi[i*2];
-			buffPhi = ThPhi[i*2+1];
-			ThPhi[i*2] = ThPhi[j*2];
-			ThPhi[i*2+1] = ThPhi[j*2+1];
-			ThPhi[j*2] = buffTh;
-			ThPhi[j*2+1] = buffPhi;
 
 			for(int p = 0;p<16;p++){
 				if(p<4){
@@ -367,7 +360,7 @@ int NodeArray::get_newnum(int i){
 
 void NodeArray::switch_nodes(int i, int j){
 
-	float buffpos,bufftet,buffF,buffn; 
+	float buffpos,bufftet,buffn; 
 	int bufftrank;
 
 		  bufftrank= totalRank[i];

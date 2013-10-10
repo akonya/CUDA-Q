@@ -10,7 +10,7 @@ void getEnergy(		  DevDataBlock *dev_dat
 					,int Nnodes
 					,float &pE
 					,float &kE){
-
+/*
 
 	//need to pitch 1D memory correctly to send to device
 	size_t height3 = 3;
@@ -47,7 +47,7 @@ void getEnergy(		  DevDataBlock *dev_dat
 
 	pE = peTOTAL/totalVolume;
 	kE = keTOTAL/totalVolume;
-
+*/
 }//getEnergy
 
 

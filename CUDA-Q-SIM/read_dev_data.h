@@ -29,14 +29,7 @@ __device__ void get_initial_data(float (&Ainv)[16]
 				node_num[n] = mynode;
 				TetNodeRank[n] = TetNodeRankG[tid + Ntets*n];
 				for(int cord = 0;cord<4;cord++){
-
-					if(cord<3){
-					//get orignal positions
-					r0[cord+n*3] = tex2D(texRef_r0,mynode,cord);
-					vlocal[cord+n*3] = v[vshift*(cord+n*3)+mynode];
-					}//cord<3
-					//get values of Ainv
-					Ainv[cord+n*4] = A[Ashift*(cord+n*4)+tid];
+  				Ainv[cord+n*4] = A[Ashift*(cord+n*4)+tid];
 				}//cord
 			}//n
 	
@@ -52,7 +45,7 @@ __device__ void get_variable_data(float (&r)[12],int *node_num){
 	
 		for(int n = 0;n<4;n++){                   //loop over nodes
 			for(int cord=0;cord<3;cord++){        //loop over x,y,z
-				r[cord+n*3] = tex2D(texRef_r,node_num[n],cord);
+//				r[cord+n*3] = tex2D(texRef_r,node_num[n],cord);
 			}//cord
 		}//n
 	

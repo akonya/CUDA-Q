@@ -1,19 +1,13 @@
 //=============================================================//
 //                                                             //
-//            ||Gpu Accelerated Fineite Element ||             //
+//                      || CUDA-Q ||                           //
 //                                                             //
-//              --------Version 6.0----------                  //
+//              --------Version 1.0----------                  //
 //                                                             //
 //                                                             //
 //                                                             //
 //    Authors: Andrew Konya      (Kent State University)       //
-//             Robin Selinger    (Kent State University)       // 
-//             Badel MBanga      (kent State University)       //
-//                                                             //
-//   Finite elemnt simulation executed on GPU using CUDA       //
-//   Hybrid MD finite element algorithm used to allow          //
-//   all computations be implemented locally requireing        //
-//   parallelization of all prccess in calculation             //
+//             Jonathan Selinger (Kent State University)       // 
 //                                                             //
 //=============================================================//
 
@@ -82,8 +76,6 @@ int main()
 
 	//exit program
 	exit_program(&dev_dat);
-*/
-	//*/
 
-    return 0;
+  return 0;
 }
