@@ -3,7 +3,7 @@
 #include "mainhead.h"
 #include "parameters.h"
 #include "printVTKframe.h"
-#include "gpuForce.h"
+#include "forceKernel.h"
 #include "updateKernel.h"
 #include "getEnergy.h"
 
@@ -14,6 +14,19 @@ void run_dynamics(DevDataBlock *data
 					, HostDataBlock *host_data
 					, int Ntets
 					, int Nnodes){
+
+
+	//=================================================================
+	//claclulate number of blocks to be executed
+	//=================================================================
+	cudaDeviceProp dev_prop;
+	HANDLE_ERROR(cudaGetDeviceProperties(&dev_prop,0));
+	int Threads_Per_Block = TPB;
+	int BlocksTet = (Ntets+Threads_Per_Block)/Threads_Per_Block;
+	int BlocksNode = (Nnodes+Threads_Per_Block)/Threads_Per_Block;
+
+
+
 /*
 	//==============================================================
 	//file to write energies to

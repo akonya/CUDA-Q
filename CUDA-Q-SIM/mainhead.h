@@ -28,13 +28,13 @@
 #include "parameters.h"
 #include "anyerrors.h"
 //#include "GPUdynamics.h"
-#include "read_dev_data.h"
 #include "exit_program.h"
 #include "update_r.h"
 #include "printVTKframe.h"
 
-#include "gpuForce.h"
-#include "sendForce.h"
+#include "forceKernel.h"
+#include "forceKernelIO.h"
+
 #include "getEnergy.h"
 #include "getQ.h"
 

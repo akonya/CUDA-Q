@@ -69,7 +69,7 @@ int main()
 	//run dynamics
 	//=================================================================
 
-	//run_dynamics(&dev_dat,&host_dat,Ntets,Nnodes);
+	run_dynamics(&dev_dat,&host_dat,Ntets,Nnodes);
 
 	//check for CUDA erros
 	any_errors();
