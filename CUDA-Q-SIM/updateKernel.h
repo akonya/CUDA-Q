@@ -55,6 +55,7 @@ __global__ void updateKernel(	 float *dF
 					,vshift);
 
 		//calculate and store new velocites
+		/*
 		update_v(	 vnew
 					,vold
 					,Fold
@@ -63,7 +64,7 @@ __global__ void updateKernel(	 float *dF
 					,vshift
 					,myNode
 					,localMass);
-
+*/
 		//calculate and store new positions
 		update_r(	 r
 					,rshift
