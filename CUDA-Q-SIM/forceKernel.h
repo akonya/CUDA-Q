@@ -51,7 +51,7 @@ __global__ void force_kernel(	float *A
              ,node_num);                  
 
 		//calculate effective force on each DOF
-//		force_calc(Ainv,r0,r,Q,F,TetNodeRank,pe,tid,myVol);
+    force_calc(Ainv,Ploc,fPloc,myVol);
 
 
 		//send data, local force components, to global memory 
