@@ -2,10 +2,12 @@
 #define __FORCEKERNEL_H__
 #include "mainhead.h"
 #include "forceKernelIO.h"
-
+#include "forceCalc.h"
 
 __global__ void force_kernel(	float *A
 								,int pitchA
+                ,float *P
+                ,int pitchP
 								,float *fP
                 ,int pitchfP
 								,int *TetNodeRankG
@@ -19,6 +21,7 @@ __global__ void force_kernel(	float *A
 
 	int Ashift = pitchA/sizeof(float);
 	int fPshift = pitchfP/sizeof(float);
+	int Pshift = pitchP/sizeof(float);
 	int TTNshift = pitchTetToNode/sizeof(int);
 	float Ainv[16];
   float Ploc[4*degreeP];
@@ -40,6 +43,8 @@ __global__ void force_kernel(	float *A
 		//read in all data needed to do force calc
 		myVol = TetVol[tid];   //simple enough here
     getDataFK(Ploc
+             ,P
+             ,Pshift
              ,Ainv
              ,A
              ,Ashift
@@ -52,7 +57,6 @@ __global__ void force_kernel(	float *A
 
 		//calculate effective force on each DOF
     force_calc(Ainv,Ploc,fPloc,myVol);
-
 
 		//send data, local force components, to global memory 
     sendDataFK(fP

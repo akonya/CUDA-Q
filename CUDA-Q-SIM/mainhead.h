@@ -22,18 +22,20 @@
 #include "getAs.h"
 #include "packdata.h"
 #include "texdef.h"
-#include "forcecalc.h"
 #include "rundynamics.h"
 #include "datatodevice.h"
 #include "parameters.h"
 #include "anyerrors.h"
-//#include "GPUdynamics.h"
 #include "exit_program.h"
-#include "update_r.h"
 #include "printVTKframe.h"
 
 #include "forceKernel.h"
 #include "forceKernelIO.h"
+#include "forceCalc.h"
+
+#include "updateKernel.h"
+#include "updateKernelIO.h"
+#include "updateCalc.h"
 
 #include "getEnergy.h"
 #include "getQ.h"

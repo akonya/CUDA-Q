@@ -1,37 +1,28 @@
 #ifndef __UPDATAKERNEL_H__
 #define __UPDATAKERNEL_H__
 
-#include "sumForce.h"
-#include "update_r.h"
+#include "updateKernelIO.h"
+#include "updateCalc.h"
+#include "parameters.h"
 
 //================================================
 // -read in all forces on each node and sum them
 // -use velocity verilet to step system forward
 // -send updated positions to global memory 
 //================================================
-__global__ void updateKernel(	 float *dF
-								,int pitchdF
-								,float *F
-								,int pitchF
+__global__ void updateKernel(	 float *fP
+								,int pitchfP
+								,float *P
+								,int pitchP
 								,int Nnodes 
-								,int *NodeRank
-								,float *v
-								,int pitchv
-								,float *r
-								,int pitchr	
-								,float *mass ){
+								,int *NodeRank){
 	
-	int dFshift = pitchdF/sizeof(float);
-	int Fshift = pitchF/sizeof(float);
-	int vshift = pitchv/sizeof(float);
-	int rshift = pitchr/sizeof(float);
+	int fPshift = pitchfP/sizeof(float);
+	int Pshift = pitchP/sizeof(float);
 	int myNode;
 	int myNodeRank;
-	float Fnew[3]={0.0};
-	float Fold[3];
-	float vold[3];
-	float vnew[3];
-	float localMass;
+	float fPloc[degreeP]={0.0};
+  float ploc[degreeP]={0.0};
 	//thread ID
 	int tid = threadIdx.x + blockIdx.x * blockDim.x;
 
@@ -39,40 +30,27 @@ __global__ void updateKernel(	 float *dF
 	if (tid<Nnodes){  //if a node is here
 		myNode=tid;
 		myNodeRank = NodeRank[myNode];
-		localMass = mass[myNode];
+    
 
-		//get new and old forces + old velocities
-		sumForce(	 myNode
-					,myNodeRank
-					,Fnew
-					,Fold
-					,vold
-					,dF
-					,dFshift
-					,F
-					,Fshift
-					,v
-					,vshift);
+    //get effective force Data
+    getDataUK(  myNode
+              , myNodeRank
+              , fPloc
+              , fP
+              , fPshift
+              , P
+              , Pshift
+              , ploc);
 
-		//calculate and store new velocites
-		/*
-		update_v(	 vnew
-					,vold
-					,Fold
-					,Fnew
-					,v
-					,vshift
-					,myNode
-					,localMass);
-*/
-		//calculate and store new positions
-		update_r(	 r
-					,rshift
-					,vnew
-					,Fnew
-					,myNode
-					,localMass);
+    //calculate new P's
+    calcP( ploc, fPloc);
 
+		//send newly calculated P's
+		sendDataUK( ploc
+              , P
+              , Pshift
+              , myNode); 
+    		
 
 	}//tid<Nnodes
 
