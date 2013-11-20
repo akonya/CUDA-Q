@@ -2,6 +2,7 @@
 #define __PRINTVTKFRAME_H__
 
 #include "mainhead.h"
+#include "qLib.h"
 
 //=============================================================
 //print new vtk file for a time step
@@ -12,32 +13,24 @@ void printVTKframe(   DevDataBlock *dev_dat
 					,int step){
 
 	//need to pitch 1D memory correctly to send to device
-//	size_t height3 = 3;
-//	size_t widthNODE = Nnodes;
+  	size_t height3 = 3;
+  	size_t widthNODE = Nnodes;
+    size_t heightP = degreeP;
 
-/*
-	HANDLE_ERROR( cudaMemcpy2D(  host_dat->host_r
-								, widthNODE*sizeof(float)
-								, dev_dat->dev_r
-								, dev_dat->dev_rpitch
-								, widthNODE*sizeof(float)
-								, height3
-								, cudaMemcpyDeviceToHost ) );
 
-	
-	HANDLE_ERROR( cudaMemcpy2D(  host_dat->host_v
+	HANDLE_ERROR( cudaMemcpy2D(  host_dat->host_P
 								, widthNODE*sizeof(float)
-								, dev_dat->dev_v
-								, dev_dat->dev_vpitch
+								, dev_dat->dev_P
+								, dev_dat->dev_Ppitch
 								, widthNODE*sizeof(float)
-								, height3
+								, heightP
 								, cudaMemcpyDeviceToHost ) );
 
 	HANDLE_ERROR( cudaMemcpy(  host_dat->host_pe
 								, dev_dat->dev_pe
 								, Ntets*sizeof(float)
 								, cudaMemcpyDeviceToHost ) );
-								
+/*								
 
 	char fout[60];
 	sprintf(fout,"VTKOUT//mesh%d.vtk",step);
@@ -90,29 +83,7 @@ void printVTKframe(   DevDataBlock *dev_dat
 	}//nt
 
 	//peTOTAL = peTOTAL*10000000.0;
-
-
-
-	fprintf(out,"\n");
-
-	fclose(out);		//close output file
-
-	float tetke,keTOTAL = 0.0,vx,vy,vz;
-	for(int nt=0;nt<Nnodes;nt++){
-		vx = host_dat->host_v[nt+0*Nnodes];
-		vy = host_dat->host_v[nt+1*Nnodes];
-		vz = host_dat->host_v[nt+2*Nnodes];
-		tetke=0.5*host_dat->host_m[nt]*(vx*vx+vy*vy+vz*vz);
-		keTOTAL+=tetke;
-	}//nt
-	keTOTAL = keTOTAL;
-	float totalVolume = host_dat->host_totalVolume*10.0;
-	printf("pE = %f J/cm^3  kE = %f J/cm^3  pE+kE = %f J/cm^3\n",peTOTAL/totalVolume,keTOTAL/totalVolume,(peTOTAL+keTOTAL)/totalVolume);
-	/*printf("\nCheck for blowup: %f %f %f\n\n",host_dat->host_r[200+0*Nnodes]
-								,host_dat->host_r[200+1*Nnodes]
-								,host_dat->host_r[200+2*Nnodes]);*/
-
-
+*/
 }//printVTKframe
 
 

@@ -4,7 +4,7 @@
 #include "parameters.h"
 #include "forceKernel.h"
 #include "updateKernel.h"
-
+#include "printVTKframe.h"
 
 
 //This funciton handles all dynamics which will be run
