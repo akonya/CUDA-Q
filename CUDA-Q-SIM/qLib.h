@@ -26,12 +26,44 @@ void QfromP(float (&P)[5],float (&Q)[9]){
   for(int i=0;i<5;i++){
     for(int j=0;j<3;j++){
       for(int k=0;k<3;k++){
-        Q[3*j+k] += T[9*i+3*j+k];
+        Q[3*j+k] += P[i]*T[9*i+3*j+k];
       }//k
     }//j
   }//i
 
 }//QfromP 
+
+
+//////////////////////////////////////
+// Get 5x1 P tensor from 3x3 Q tensor 
+//////////////////////////////////////
+void PfromQ(float (&P)[5],float (&Q)[9]){
+  float c1 = 0.4082482904638631; // 1/sqrt(6)
+  float c2 = 0.7071067811865475; // 1/sqrt(2)
+
+  //Q_jk    indexed by Q[3*j+k]
+  //T^i_jk   indexed by T[9*i+3*j+k]
+
+  float T[45]={-c1,0.,0.,0.,c1,0.,0.,0.,2.0*c1 \
+               ,c2,0.,0.,0.,-c2,0.,0.,0.,0. \
+               ,0.,c2,0.,c2,0.,0.,0.,0.,0. \
+               ,0.,0.,c2,0.,0.,0.,c2,0.,0. \
+               ,0.,0.,0.,0.,0.,c2,0.,c2,0.};
+
+  //zero out Q
+  for(int i=0;i<6;i++){P[i]=0.0;}
+
+  //construct Q_jk = P_i T_ijk
+  for(int i=0;i<5;i++){
+    for(int j=0;j<3;j++){
+      for(int k=0;k<3;k++){
+       P[i]+= Q[3*j+k]*T[9*i+3*j+k];
+      }//k
+    }//j
+  }//i
+
+}//QfromP 
+
 
 
 //////////////////////////////////////
